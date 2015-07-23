@@ -383,6 +383,8 @@ class Server(object):
         try:
             self.wifi_connection.activate()
             self.logger.info("Connected to wifi %s" % self.wifi_connection_ssid)
+            self.logger.info("Restarting avahi.")
+            subprocess.check_call(['service', 'avahi-daemon', 'restart'])
             return True
 
         except wifi.scheme.WifiError as e:
